@@ -2,7 +2,7 @@
 
 
 """
-Setup script for fbchat
+Setup script for FBBack
 """
 
 
@@ -21,7 +21,7 @@ version = None
 author = None
 email = None
 source = None
-with open(os.path.join('fbchat', '__init__.py')) as f:
+with open(os.path.join('FBBack', '__init__.py')) as f:
     for line in f:
         if line.strip().startswith('__version__'):
             version = line.split('=')[1].strip().replace('"', '').replace("'", '')
@@ -35,11 +35,11 @@ with open(os.path.join('fbchat', '__init__.py')) as f:
             break
 
 setup(
-    name='fbchat',
+    name='FBBack',
     author=author,
     author_email=email,
     license='BSD License',
-    keywords=["facebook chat fbchat"],
+    keywords=["facebook chat fbchat FBBack"],
     description="Facebook Chat (Messenger) for Python",
     long_description=readme_content,
     classifiers=[
@@ -66,7 +66,7 @@ setup(
         'Topic :: Communications :: Chat',
     ],
     include_package_data=True,
-    packages=['fbchat'],
+    packages=['FBBack'],
     install_requires=[
         'requests',
         'lxml',

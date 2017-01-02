@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 """
-    fbchat
+    FBBack
     ~~~~~~
 
     Facebook Chat (Messenger) for Python
@@ -48,7 +48,7 @@ log = logging.getLogger("client")
 class Client(object):
     """A client for the Facebook Chat (Messenger).
 
-    See http://github.com/carpedm20/fbchat for complete
+    See http://github.com/vlegoff/FBBack for complete
     documentation for the API.
 
     """
@@ -59,8 +59,8 @@ class Client(object):
         :param email: Facebook `email` or `id` or `phone number`
         :param password: Facebook account password
 
-            import fbchat
-            chat = fbchat.Client(email, password)
+            import FBBack
+            chat = FBBack.Client(email, password)
 
         """
 
@@ -123,11 +123,11 @@ class Client(object):
         This method shouldn't be used anymore.
         Use the log itself:
         >>> import logging
-        >>> from fbchat.client import Client, log
+        >>> from FBBack.client import Client, log
         >>> log.setLevel(logging.DEBUG)
 
         You can do the same thing by addint the 'debug' argument:
-        >>> from fbchat import Client
+        >>> from FBBack import Client
         >>> client = Client("...", "...", debug=True)
 
         """

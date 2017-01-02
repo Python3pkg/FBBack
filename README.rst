@@ -1,9 +1,10 @@
 ======
-fbchat
+FBBack
 ======
 
 
 Facebook Chat (`Messenger <https://www.messenger.com/>`__) for Python. This project was inspired by `facebook-chat-api <https://github.com/Schmavery/facebook-chat-api>`__.
+**FBBack** (pronunce F-B-Back) was forked from Taehoon Kim (/ `@carpedm20 <http://carpedm20.github.io/about/>`__)'s `fbchat <https://github.com/carpedm20/fbchat>`__.
 
 **No XMPP or API key is needed**. Just use your ID and PASSWORD.
 
@@ -15,7 +16,7 @@ Simple:
 
 .. code-block:: console
 
-    $ pip install fbchat
+    $ pip install FBBack
 
 
 Example
@@ -23,16 +24,16 @@ Example
 
 .. code-block:: python
 
-    import fbchat
+    import FBBack
 
-    client = fbchat.Client("YOUR_ID", "YOUR_PASSWORD")
+    client = FBBack.Client("YOUR_ID", "YOUR_PASSWORD")
 
 
 Sending a Message
 =================
 
 .. code-block:: python
-    
+
     friends = client.getUsers("FRIEND'S NAME")  # return a list of names
     friend = friends[0]
     sent = client.send(friend.uid, "Your Message")
@@ -53,17 +54,17 @@ Getting user info from user id
     friend2 = client.getUsers('<friend name 2>')[0]
     friend1_info = client.getUserInfo(friend1.uid) # returns dict with details
     both_info = client.getUserInfo(friend1.uid,friend2.uid) # query both together, returns list of dicts
-    friend1_name = friend1_info['name'] 
+    friend1_name = friend1_info['name']
 
 
 Getting last messages sent
 ==========================
 
 .. code-block:: python
-    
+
     last_messages = client.getThreadInfo(friend.uid,0)
     last_messages.reverse()  # messages come in reversed order
-    
+
     for message in last_messages:
         print(message.body)
 
@@ -73,12 +74,14 @@ Example Echobot
 
 .. code-block:: python
 
-    import fbchat
-    #subclass fbchat.Client and override required methods
-    class EchoBot(fbchat.Client): 
+    import FBBack
 
-        def __init__(self,email, password, debug=True, user_agent=None):            
-            fbchat.Client.__init__(self,email, password, debug, user_agent)
+    # Subclass FBBack.Client and override required methods
+
+    class EchoBot(FBBack.Client):
+
+        def __init__(self, email, password, debug=True, user_agent=None):
+            FBBack.Client.__init__(self, email, password, debug, user_agent)
 
         def on_message(self, mid, author_id, author_name, message, metadata):
             self.markAsDelivered(author_id, mid) #mark delivered
@@ -89,7 +92,7 @@ Example Echobot
             #if you are not the author, echo
             if str(author_id) != str(self.uid):
                 self.send(author_id,message)
-    
+
     bot = EchoBot("<email>", "<password>")
     bot.listen()
 
@@ -98,4 +101,5 @@ Example Echobot
 Authors
 =======
 
-Taehoon Kim / `@carpedm20 <http://carpedm20.github.io/about/>`__
+Original author: Taehoon Kim / `@carpedm20 <http://carpedm20.github.io/about/>`__
+Frked by: Le Goff Vincent / `@vlegoff <https://github.com/vlegoff/>`__

@@ -321,7 +321,7 @@ class Client(object):
 
         r = self._post(SendURL, data)
 
-        log.debug("Sending {}".format(r))
+        log.debug("Sending {}".format(repr(message)))
         log.debug("With data {}".format(data))
         return r.ok
 
@@ -495,7 +495,11 @@ class Client(object):
         newer api needs these parameter to work.
         '''
 
-        data = {"msgs_recv": 0}
+        data = {
+            "msgs_recv": 0,
+            "channel": self.user_channel,
+            "clientid": self.client_id
+        }
 
         r = self._get(StickyURL, data)
         j = get_json(r.text)
@@ -521,9 +525,11 @@ class Client(object):
         }
 
         r = self._get(StickyURL, data)
-        j = get_json(r.text)
+        r.encoding = 'utf-8'
+        for line in r.iter_lines(decode_unicode=True):
+            j = get_json(r.text)
 
-        self.seq = j.get('seq', '0')
+            self.seq = j.get('seq', '0')
         return j
 
 
@@ -535,7 +541,7 @@ class Client(object):
 
         if 'ms' not in content: return
 
-        log.debug("Received {}".format(content["ms"]))
+        log.debug("Received {}".format(repr(content["ms"])))
         for m in content['ms']:
             try:
                 if m['type'] in ['m_messaging', 'messaging']:

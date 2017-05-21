@@ -1,4 +1,4 @@
-from __future__ import unicode_literals
+
 import sys
 
 class Base():
@@ -7,7 +7,7 @@ class Base():
         return uni.encode('utf-8') if sys.version_info < (3, 0) else uni
 
     def __unicode__(self):
-        return u'<%s %s (%s)>' % (self.type.upper(), self.name, self.url)
+        return '<%s %s (%s)>' % (self.type.upper(), self.name, self.url)
 
 class User(Base):
     def __init__(self, data):
